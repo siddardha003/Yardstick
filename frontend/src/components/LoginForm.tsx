@@ -17,7 +17,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, loading, error }) => {
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
-      <h2>Login</h2>
       <input
         type="email"
         placeholder="Email"

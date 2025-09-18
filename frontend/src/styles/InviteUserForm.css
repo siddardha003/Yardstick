@@ -1,0 +1,45 @@
+/* Invite User Form Styles */
+.invite-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.invite-form input,
+.invite-form select {
+  padding: 0.7rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #374151;
+  transition: border 0.2s, background 0.2s;
+}
+
+.invite-form input:focus,
+.invite-form select:focus {
+  border: 1.5px solid #646cff;
+  background: #fff;
+  outline: none;
+}
+
+.invite-form button {
+  background: #10b981;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.invite-form button:hover {
+  background: #059669;
+}
+
+.invite-form button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}

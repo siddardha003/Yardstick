@@ -1,0 +1,82 @@
+/* Login Page Styles */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fefefe; /* Clean white background as requested */
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.login-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  border: 1px solid #f0f0f0;
+  margin-bottom: 20px;
+}
+
+.login-title {
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.login-subtitle {
+  color: #6b7280;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  margin: 0 auto;
+}
+
+.test-credentials {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+}
+
+.test-credentials h4 {
+  margin: 0 0 0.5rem 0;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.test-credentials ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.test-credentials li {
+  margin: 0.25rem 0;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .login-title {
+    font-size: 1.6rem;
+  }
+}
