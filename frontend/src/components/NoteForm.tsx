@@ -1,19 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface NoteFormProps {
   onCreate: (title: string, content: string) => void;
+  onUpdate?: (title: string, content: string) => void;
+  onCancel?: () => void;
+  initialTitle?: string;
+  initialContent?: string;
+  isEditing?: boolean;
 }
 
-const NoteForm: React.FC<NoteFormProps> = ({ onCreate }) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const NoteForm: React.FC<NoteFormProps> = ({ 
+  onCreate, 
+  onUpdate, 
+  onCancel,
+  initialTitle = '',
+  initialContent = '',
+  isEditing = false
+}) => {
+  const [title, setTitle] = useState(initialTitle);
+  const [content, setContent] = useState(initialContent);
+
+  useEffect(() => {
+    setTitle(initialTitle);
+    setContent(initialContent);
+  }, [initialTitle, initialContent]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !content) return;
-    onCreate(title, content);
-    setTitle('');
-    setContent('');
+    
+    if (isEditing && onUpdate) {
+      onUpdate(title, content);
+    } else {
+      onCreate(title, content);
+      setTitle('');
+      setContent('');
+    }
   };
 
   return (
@@ -31,7 +53,16 @@ const NoteForm: React.FC<NoteFormProps> = ({ onCreate }) => {
         onChange={e => setContent(e.target.value)}
         required
       />
-      <button type="submit">Add Note</button>
+      <div className="note-form-buttons">
+        <button type="submit">
+          {isEditing ? 'Update Note' : 'Add Note'}
+        </button>
+        {isEditing && onCancel && (
+          <button type="button" onClick={onCancel} className="cancel-btn">
+            Cancel
+          </button>
+        )}
+      </div>
     </form>
   );
 };

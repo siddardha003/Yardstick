@@ -1,4 +1,3 @@
-// Axios instance with JWT
 import axios from 'axios';
 
 const api = axios.create({

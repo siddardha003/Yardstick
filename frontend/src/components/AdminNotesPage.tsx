@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/client';
 import NoteForm from './NoteForm';
-import UpgradeButton from './UpgradeButton';
 
 interface Note {
   _id: string;
@@ -22,6 +21,7 @@ const AdminNotesPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [tenantInfo, setTenantInfo] = useState<TenantInfo>({ plan: 'free', name: 'Loading...' });
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editingNote, setEditingNote] = useState<Note | null>(null);
 
   useEffect(() => {
     fetchNotes();
@@ -49,10 +49,6 @@ const AdminNotesPage: React.FC = () => {
     }
   };
 
-  const handleUpgradeSuccess = () => {
-    // Refresh tenant info after successful upgrade
-    fetchTenantInfo();
-  };
 
   const handleCreate = async (title: string, content: string) => {
     try {
@@ -66,6 +62,31 @@ const AdminNotesPage: React.FC = () => {
         setError('Failed to create note');
       }
     }
+  };
+
+  const handleEdit = (note: Note) => {
+    setEditingNote(note);
+    setShowAddForm(false); // Hide add form if open
+  };
+
+  const handleUpdate = async (title: string, content: string) => {
+    if (!editingNote) return;
+    
+    try {
+      await api.put(`/notes/${editingNote._id}`, { title, content });
+      setEditingNote(null);
+      fetchNotes(); // Refresh notes list
+    } catch (err) {
+      if (err && typeof err === 'object' && 'response' in err) {
+        setError((err as { response?: { data?: { message?: string } } }).response?.data?.message || 'Failed to update note');
+      } else {
+        setError('Failed to update note');
+      }
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingNote(null);
   };
 
   const handleDelete = async (id: string) => {
@@ -116,7 +137,6 @@ const AdminNotesPage: React.FC = () => {
           <div className="warning-content">
             <h3>⚠️ Free Plan Limit Reached</h3>
             <p>You've reached the free plan limit of 3 notes. Upgrade to Pro to add unlimited notes!</p>
-            <UpgradeButton onUpgradeSuccess={handleUpgradeSuccess} />
           </div>
         </div>
       )}
@@ -129,19 +149,43 @@ const AdminNotesPage: React.FC = () => {
         </div>
       )}
 
-      {/* Notes grid */}
+      {/* Edit note form */}
+      {editingNote && (
+        <div className="edit-note-section">
+          <h3>Edit Note</h3>
+          <NoteForm 
+            onCreate={handleCreate}
+            onUpdate={handleUpdate}
+            onCancel={handleCancelEdit}
+            initialTitle={editingNote.title}
+            initialContent={editingNote.content}
+            isEditing={true}
+          />
+        </div>
+      )}
+
+     
       <div className="notes-grid">
         {notes.map(note => (
           <div key={note._id} className="note-card">
             <div className="note-header">
               <h3 className="note-title">{note.title}</h3>
-              <button 
-                className="delete-btn"
-                onClick={() => handleDelete(note._id)}
-                title="Delete note"
-              >
-                ×
-              </button>
+              <div className="note-actions">
+                <button 
+                  className="edit-btn"
+                  onClick={() => handleEdit(note)}
+                  title="Edit note"
+                >
+                  Edit
+                </button>
+                <button 
+                  className="delete-btn"
+                  onClick={() => handleDelete(note._id)}
+                  title="Delete note"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
             <div className="note-content">
               <p>{note.content}</p>
