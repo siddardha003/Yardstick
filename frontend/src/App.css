@@ -1,42 +1,200 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+/* Only shared component styles - specific styles are in styles/ folder */
+
+ .note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 350px;
+  background: #ffffff;
   padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  margin: 0 auto;
+}
+
+.login-form input, .note-form input, .note-form textarea {
+  padding: 0.7rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9f9f9;
+  color: #222;
+  transition: border 0.2s;
+}
+
+.login-form input:focus, .note-form input:focus, .note-form textarea:focus {
+  border: 1.5px solid #646cff;
+  outline: none;
+}
+
+button {
+  background: #646cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #535bf2;
+}
+
+/* Upgrade Button Styles */
+.upgrade-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.upgrade-btn:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
+}
+
+.upgrade-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Upgrade Modal Content Styles */
+.upgrade-content {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.plan-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.current-plan, .pro-plan {
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid #e5e7eb;
+}
+
+.current-plan {
+  background: #f9fafb;
+}
+
+.pro-plan {
+  background: #f0f9ff;
+  border-color: #0ea5e9;
+}
+
+.current-plan h3, .pro-plan h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.current-plan p, .pro-plan p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.upgrade-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.confirm-upgrade-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.confirm-upgrade-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.confirm-upgrade-btn:disabled, .cancel-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .plan-comparison {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .upgrade-buttons {
+    flex-direction: column;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.notes-list {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 2rem auto;
 }
 
-.card {
-  padding: 2em;
+.notes-list li {
+  background: #ffffff;
+  margin-bottom: 1.2rem;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.read-the-docs {
-  color: #888;
+.notes-list h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.15rem;
+  color: #222;
+}
+
+.notes-list p {
+  margin: 0 0 0.7rem 0;
+  color: #444;
+}
+
+.error {
+  color: #d32f2f;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
 }

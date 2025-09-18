@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 import { getToken, setToken, removeToken } from '../utils/storage';
 
 interface User {
@@ -15,12 +16,14 @@ interface AuthContextType {
   logout: () => void;
 }
 
-export const AuthContext = createContext<AuthContextType>({
+
+const AuthContext = createContext<AuthContextType>({
   user: null,
   token: null,
   login: () => {},
   logout: () => {},
 });
+export { AuthContext };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
