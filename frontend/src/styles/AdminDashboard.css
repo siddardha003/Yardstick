@@ -83,7 +83,7 @@
 
 /* Dashboard Overview Styles */
 .dashboard-overview {
-  max-width: 1200px;
+  align-items: center;  
 }
 
 .stats-grid {
@@ -188,7 +188,7 @@
 
 /* Users Page Styles */
 .users-page {
-  max-width: 1200px;
+  max-width: auto;
 }
 
 .users-header {
@@ -293,7 +293,7 @@
 
 /* Notes Page Styles */
 .notes-page {
-  max-width: 1200px;
+  max-width: auto;
 }
 
 .notes-header {
@@ -365,6 +365,22 @@
   font-weight: 600;
 }
 
+.edit-note-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 2px solid #3b82f6;
+  margin-bottom: 2rem;
+}
+
+.edit-note-section h3 {
+  margin: 0 0 1rem 0;
+  color: #1f2937;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -401,14 +417,38 @@
   flex: 1;
 }
 
+.note-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.edit-btn:hover {
+  background: #2563eb;
+}
+
 .delete-btn {
   background: #ef4444;
   color: white;
   border: none;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  font-size: 1rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 0.8rem;
   cursor: pointer;
   display: flex;
   align-items: center;

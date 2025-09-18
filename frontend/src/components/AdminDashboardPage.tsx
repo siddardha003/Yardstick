@@ -53,7 +53,6 @@ const AdminDashboardPage: React.FC = () => {
   };
 
   const handleUpgradeSuccess = () => {
-    // Refresh tenant info and stats after successful upgrade
     fetchTenantInfo();
     fetchStats();
   };
@@ -63,7 +62,7 @@ const AdminDashboardPage: React.FC = () => {
       await api.post('/users/invite', { email, role });
       alert('User invited successfully!');
       setShowInviteModal(false);
-      fetchStats(); // Refresh stats
+      fetchStats();
     } catch (err) {
       if (err && typeof err === 'object' && 'response' in err) {
         setError((err as { response?: { data?: { message?: string } } }).response?.data?.message || 'Failed to invite user');

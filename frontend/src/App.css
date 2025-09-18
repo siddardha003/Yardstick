@@ -13,6 +13,22 @@
   margin: 0 auto;
 }
 
+.note-form-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.note-form-buttons .cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.note-form-buttons .cancel-btn:hover {
+  background: #e5e7eb;
+}
+
 .login-form input, .note-form input, .note-form textarea {
   padding: 0.7rem 1rem;
   border: 1px solid #d1d5db;
