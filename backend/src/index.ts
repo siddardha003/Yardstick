@@ -5,7 +5,14 @@ import cors from 'cors';
 import { connectDB } from './config/db';
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://yardstick-frontend-chi.vercel.app',
+    process.env.CLIENT_URL
+  ].filter((url): url is string => Boolean(url)),
+  credentials: true
+}));
 app.use(express.json());
 
 // Health check endpoint
