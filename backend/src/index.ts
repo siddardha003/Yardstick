@@ -15,6 +15,26 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Welcome endpoint for root URL
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Yardstick Notes API',
+    version: '1.0.0',
+    description: 'Multi-Tenant SaaS Notes Application Backend',
+    endpoints: {
+      health: '/health',
+      debug: '/debug',
+      authentication: '/auth/*',
+      notes: '/notes/*',
+      users: '/users/*',
+      tenants: '/tenants/*'
+    },
+    documentation: 'https://github.com/siddardha003/Yardstick',
+    frontend: 'https://yardstick-frontend-chi.vercel.app',
+    status: 'operational'
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
